@@ -47,6 +47,9 @@ class Config : public QObject
     Q_PROPERTY( QString cmdSshdEnable READ cmdSshdEnable CONSTANT FINAL )
     Q_PROPERTY( QString cmdSshdDisable READ cmdSshdDisable CONSTANT FINAL )
 
+    /* wait */
+    Q_PROPERTY( QString waitTime READ waitTime CONSTANT FINAL )
+
 public:
     Config( QObject* parent = nullptr );
     void setConfigurationMap( const QVariantMap& );
@@ -98,6 +101,9 @@ public:
     QString cmdSshdDisable() const { return m_cmdSshdDisable; }
     QString cmdSshdUseradd() const { return m_cmdSshdUseradd; }
 
+    /* wait */
+    QString waitTime() const { return m_waitTime; }
+
 private:
     /* welcome */
     QString m_osName;
@@ -135,6 +141,9 @@ private:
     QString m_cmdSshdEnable;
     QString m_cmdSshdDisable;
     QString m_cmdSshdUseradd;
+
+    /* wait */
+    QString m_waitTime;
 
 signals:
     /* booleans we don't read from QML (like isSshEnabled) don't need a signal */
