@@ -1,0 +1,6 @@
+# The fspackages module installs and removes packages based on which filesystem was chosen.
+---
+type:       "job"
+interface:  "python"
+name:       "fspackages"
+script:     "main.py"
