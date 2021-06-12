@@ -58,6 +58,7 @@ project(calamares-extensions
     LANGUAGES CXX
 )
 
+set( CMAKE_CXX_FLAGS_RELEASE "${CXXFLAGS}" )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 
