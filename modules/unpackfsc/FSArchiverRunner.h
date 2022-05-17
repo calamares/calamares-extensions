@@ -12,19 +12,48 @@
 
 #include "Runners.h"
 
+/** @brief Base class for runners of FSArchiver
+ *
+ */
 class FSArchiverRunner : public Runner
 {
     Q_OBJECT
 public:
     using Runner::Runner;
 
-    Calamares::JobResult run() override;
-
 protected Q_SLOTS:
     void fsarchiverProgress( QString line );
 
-private:
+protected:
+    /** @brief Checks prerequisites, sets full path of fsarchiver in @p executable
+     */
+    Calamares::JobResult checkPrerequisites( QString& executable ) const;
+    Calamares::JobResult checkDestination( QString& destinationPath ) const;
+
     int m_since = 0;
 };
+
+/** @brief Running FSArchiver in **dir** mode
+ *
+ */
+class FSArchiverDirRunner : public FSArchiverRunner
+{
+public:
+    using FSArchiverRunner::FSArchiverRunner;
+
+    Calamares::JobResult run() override;
+};
+
+/** @brief Running FSArchiver in **dir** mode
+ *
+ */
+class FSArchiverFSRunner : public FSArchiverRunner
+{
+public:
+    using FSArchiverRunner::FSArchiverRunner;
+
+    Calamares::JobResult run() override;
+};
+
 
 #endif

@@ -52,12 +52,15 @@ UnsquashRunner::run()
         m_inodes = -1;
         Calamares::Utils::Runner r( { unsquashExecutable, QStringLiteral( "-s" ), m_source } );
         r.setLocation( Calamares::Utils::RunLocation::RunInHost ).enableOutputProcessing();
-        QObject::connect( &r, &decltype( r )::output, [&]( QString line ) {
-            if ( line.startsWith( "Number of inodes " ) )
-            {
-                m_inodes = line.split( ' ', SplitSkipEmptyParts ).last().toInt();
-            }
-        } );
+        QObject::connect( &r,
+                          &decltype( r )::output,
+                          [ & ]( QString line )
+                          {
+                              if ( line.startsWith( "Number of inodes " ) )
+                              {
+                                  m_inodes = line.split( ' ', SplitSkipEmptyParts ).last().toInt();
+                              }
+                          } );
         /* ignored */ r.run();
     }
     if ( m_inodes <= 0 )

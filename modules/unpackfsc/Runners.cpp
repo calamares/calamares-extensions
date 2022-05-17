@@ -21,7 +21,7 @@ Runner::Runner( const QString& source, const QString& destination )
 {
 }
 
-Runner::~Runner() {}
+Runner::~Runner() { }
 
 bool
 Runner::checkSourceExists() const

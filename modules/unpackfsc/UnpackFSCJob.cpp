@@ -31,7 +31,8 @@ typeNames()
         { "fsarchive", T::FSArchive },
         { "fsa", T::FSArchive },
         { "fsa-dir", T::FSArchive },
-        // TODO: support fsa-block, savefs/restfs format
+        { "fsa-block", T::FSArchiveFS },
+        { "fsa-fs", T::FSArchiveFS },
         { "squashfs", T::Squashfs },
         { "squash", T::Squashfs },
         { "unsquash", T::Squashfs },
@@ -45,7 +46,7 @@ UnpackFSCJob::UnpackFSCJob( QObject* parent )
 {
 }
 
-UnpackFSCJob::~UnpackFSCJob() {}
+UnpackFSCJob::~UnpackFSCJob() { }
 
 QString
 UnpackFSCJob::prettyName() const
@@ -66,7 +67,10 @@ UnpackFSCJob::exec()
     switch ( m_type )
     {
     case Type::FSArchive:
-        r = std::make_unique< FSArchiverRunner >( m_source, m_destination );
+        r = std::make_unique< FSArchiverDirRunner >( m_source, m_destination );
+        break;
+    case Type::FSArchiveFS:
+        r = std::make_unique< FSArchiverFSRunner >( m_source, m_destination );
         break;
     case Type::Squashfs:
         r = std::make_unique< UnsquashRunner >( m_source, m_destination );
@@ -77,10 +81,13 @@ UnpackFSCJob::exec()
         return Calamares::JobResult::ok();
     }
 
-    connect( r.get(), &Runner::progress, [=]( qreal percent, const QString& message ) {
-        m_progressMessage = message;
-        Q_EMIT progress( percent );
-    } );
+    connect( r.get(),
+             &Runner::progress,
+             [ = ]( qreal percent, const QString& message )
+             {
+                 m_progressMessage = message;
+                 Q_EMIT progress( percent );
+             } );
     return r->run();
 }
 

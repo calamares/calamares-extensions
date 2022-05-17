@@ -23,6 +23,7 @@ public:
     {
         None,  /// << Invalid
         FSArchive,
+        FSArchiveFS,
         Squashfs,
     };
 
