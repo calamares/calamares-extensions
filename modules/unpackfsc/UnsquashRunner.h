@@ -14,7 +14,6 @@
 
 /** @brief Use Unsquash for extracting a filesystem
  *
- * NOTE: not implemented
  */
 class UnsquashRunner : public Runner
 {
