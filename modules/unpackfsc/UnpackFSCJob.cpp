@@ -10,6 +10,7 @@
 #include "UnpackFSCJob.h"
 
 #include "FSArchiverRunner.h"
+#include "TarballRunner.h"
 #include "UnsquashRunner.h"
 
 #include <utils/Logger.h>
@@ -36,6 +37,9 @@ typeNames()
         { "squashfs", T::Squashfs },
         { "squash", T::Squashfs },
         { "unsquash", T::Squashfs },
+        { "tar", T::Tarball },
+        { "tarball", T::Tarball },
+        { "tgz", T::Tarball },
     };
     // clang-format on
     return names;
@@ -74,6 +78,9 @@ UnpackFSCJob::exec()
         break;
     case Type::Squashfs:
         r = std::make_unique< UnsquashRunner >( m_source, m_destination );
+        break;
+    case Type::Tarball:
+        r = std::make_unique< TarballRunner >( m_source, m_destination );
         break;
     case Type::None:
     default:

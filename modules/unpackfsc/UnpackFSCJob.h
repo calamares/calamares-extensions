@@ -25,6 +25,7 @@ public:
         FSArchive,
         FSArchiveFS,
         Squashfs,
+        Tarball,
     };
 
     explicit UnpackFSCJob( QObject* parent = nullptr );

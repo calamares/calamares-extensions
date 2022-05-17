@@ -9,6 +9,7 @@ calamares_add_plugin( unpackfsc
         # The workers for differently-packed filesystems
         Runners.cpp
         FSArchiverRunner.cpp
+        TarballRunner.cpp
         UnsquashRunner.cpp
     SHARED_LIB
 )
