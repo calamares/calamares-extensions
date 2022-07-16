@@ -118,7 +118,7 @@ PartitionJob::exec()
         const QString pathRoot = "/";
 
         ProcessResult res
-            = System::runCommand( System::RunLocation::RunInHost, args, pathRoot, stdInput, chrono::seconds( 120 ) );
+            = System::runCommand( System::RunLocation::RunInHost, args, pathRoot, stdInput, chrono::seconds( 600 ) );
         if ( res.getExitCode() )
         {
             return JobResult::error( "Command failed:<br><br>"
