@@ -1,22 +1,32 @@
 ---
 componentName:  kaos
 
+welcomeStyleCalamares:   false
+
 # Should the welcome image (productWelcome, below) be scaled
 # up beyond its natural size?
 welcomeExpandingLogo:   true
 
+windowExpanding:    normal
+windowSize: 920px,630px
+windowPlacement: center
+
+sidebar: qml,bottom
+navigation: qml,right
+
 strings:
     productName:         KaOS
     shortProductName:    KaOS
-    version:             2018.03
+    version:             2022.08
     shortVersion:        KaOS
-    versionedName:       KaOS 2018.03
+    versionedName:       KaOS 2022.08
     shortVersionedName:  KaOS 2018.03
     bootloaderEntryName: KaOS
     productUrl:          https://kaosx.us/
     supportUrl:          https://kaosx.us/docs/
     knownIssuesUrl:      https://kaosx.us/pages/download/#known-issues
     releaseNotesUrl:     https://kaosx.us/pages/release_notes
+    donateUrl:           https://kaosx.us/about/donors
 
 images:
     productLogo:         "kaos.png"
@@ -27,6 +37,7 @@ slideshow:               "show.qml"
 slideshowAPI:            1
 
 style:
-   sidebarBackground:    "#bdc3c7"
-   sidebarText:          "#1F1F1F"
-   sidebarTextSelect:    "#3498DB"
+   SidebarBackground:    "#bdc3c7"
+   SidebarText:          "#1F1F1F"
+   SidebarTextCurrent:    "#3498DB"
+   SidebarBackgroundCurrent: "#eff0f1"

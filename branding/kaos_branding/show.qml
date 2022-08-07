@@ -1,6 +1,7 @@
 /* === This file is part of Calamares - <https://github.com/calamares> ===
  *
  *   Copyright 2015, Teo Mrnjavac <teo@kde.org>
+ *   Copyright 2015-2018, Anke Boersma <demm@kaosx.us>
  *
  *   Calamares is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -24,13 +25,12 @@ Presentation
     id: presentation
 
     Timer {
-        id: advanceTimer
         interval: 5000
         running: false
         repeat: true
         onTriggered: presentation.goToNextSlide()
     }
-    
+
     Slide {
         anchors.fill: parent
 
@@ -38,7 +38,7 @@ Presentation
             id: background
             source: "1.svg"
             anchors.fill: parent
-        
+
             Text {
                 anchors.centerIn: parent
                 anchors.verticalCenterOffset: 0
@@ -96,15 +96,15 @@ Presentation
                 anchors.horizontalCenterOffset: -100
                 font.pixelSize: parent.width *.015
                 color: 'white'
-                text: qsTr("The default Office Suite is Calligra.<br/>"+
-                    "LibreOffice is available in the repositories. <br/>")
+                text: qsTr("The default Office Suite is LibreOffice.<br/>"+
+                    "Calligra is available in the repositories. <br/>")
                 wrapMode: Text.WordWrap
                 width: 450
                 horizontalAlignment: Text.AlignLeft
             }
         }
     }
-    
+
     Slide {
         anchors.fill: parent
 
@@ -120,7 +120,7 @@ Presentation
                 font.pixelSize: parent.width *.015
                 color: 'white'
                 text: qsTr("Qt/KDE specific internet applications include the <br/>"+
-                    "Qupzilla web-browser and kde-telepathy for <br/>"+
+                    "Falkon web-browser and kde-telepathy for <br/>"+
                     "chat and Instant Messaging. <br/>")
                 wrapMode: Text.WordWrap
                 width: 450
@@ -128,7 +128,7 @@ Presentation
             }
         }
     }
-    
+
     Slide {
         anchors.fill: parent
 
@@ -150,7 +150,7 @@ Presentation
             }
         }
     }
-    
+
     Slide {
         anchors.fill: parent
 
@@ -172,6 +172,4 @@ Presentation
             }
         }
     }
-
-    Component.onCompleted: advanceTimer.running = true
 }

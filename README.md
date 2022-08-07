@@ -40,7 +40,10 @@ and documentation for the framework that Calamares ships with.
    (probably moreso than the default slideshow).
  - [`kaos_branding/`](branding/kaos_branding/branding.desc)
    is a copy of the KaOS branding component, which
-   has translations and a bunch of fancy graphics.
+   has translations and a bunch of fancy graphics for the
+   slideshow. Plus it includes examples of using different
+   QML options for a vertical navigation bar and horizontal
+   sidebar.
  - [`samegame/` ](branding/default/branding.desc)
    is a copy of the Qt Company "Same Game" QML demo. It
    shows that **any** QML can be used for branding purposes.
