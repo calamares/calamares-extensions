@@ -30,6 +30,12 @@ Config::setConfigurationMap( const QVariantMap& cfgMap )
     m_device = getString( cfgMap, "device", "(unknown)" );
     m_userInterface = getString( cfgMap, "userInterface", "(unknown)" );
     m_version = getString( cfgMap, "version", "(unknown)" );
+
+    m_reservedUsernames = getStringList( cfgMap, "reservedUsernames", QStringList { "adm", "at ", "bin", "colord",
+            "cron", "cyrus", "daemon", "ftp", "games", "geoclue", "guest", "halt", "lightdm", "lp", "mail", "man",
+            "messagebus", "news", "nobody", "ntp", "operator", "polkitd", "postmaster", "pulse", "root", "shutdown",
+            "smmsp", "squid", "sshd", "sync", "uucp", "vpopmail", "xfs" } );
+
     m_username = getString( cfgMap, "username", "user" );
     m_userPasswordNumeric = getBool( cfgMap, "userPasswordNumeric", true );
 

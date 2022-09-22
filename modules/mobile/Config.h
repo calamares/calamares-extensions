@@ -20,6 +20,9 @@ class Config : public QObject
     Q_PROPERTY( QString userInterface READ userInterface CONSTANT FINAL )
     Q_PROPERTY( QString version READ version CONSTANT FINAL )
 
+    /* reserved usernames (user_pass, ssh_credentials )*/
+    Q_PROPERTY( QStringList reservedUsernames READ reservedUsernames CONSTANT FINAL )
+
     /* default user */
     Q_PROPERTY( QString username READ username CONSTANT FINAL )
     Q_PROPERTY( QString userPassword READ userPassword WRITE setUserPassword NOTIFY userPasswordChanged )
@@ -71,6 +74,9 @@ public:
     QString device() const { return m_device; }
     QString userInterface() const { return m_userInterface; }
     QString version() const { return m_version; }
+
+    /* reserved usernames (user_pass, ssh_credentials) */
+    QStringList reservedUsernames() const { return m_reservedUsernames; };
 
     /* default user */
     QString username() const { return m_username; }
@@ -134,6 +140,9 @@ private:
     QString m_device;
     QString m_userInterface;
     QString m_version;
+
+    /* reserved usernames (user_pass, ssh_credentials) */
+    QStringList m_reservedUsernames;
 
     /* default user */
     QString m_username;
