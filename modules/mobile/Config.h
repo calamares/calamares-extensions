@@ -78,7 +78,7 @@ public:
     void setUserPassword( const QString& userPassword );
     bool userPasswordNumeric() const { return m_userPasswordNumeric; }
 
-    /* ssh server + credetials */
+    /* ssh server + credentials */
     bool featureSshd() { return m_featureSshd; }
     QString sshdUsername() const { return m_sshdUsername; }
     QString sshdPassword() const { return m_sshdPassword; }

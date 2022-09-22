@@ -318,7 +318,7 @@ Page
         ]
 
         /* Validate characters */
-        for (var i=0; i<name.length; i++) {
+        for (var i = 0; i < name.length; i++) {
             if (i) {
                 if (!name[i].match(/^[a-z0-9_-]$/))
                     return validationFailure(errorText,
@@ -335,7 +335,7 @@ Page
         }
 
         /* Validate against reserved usernames */
-        for (var i=0;i<reserved.length;i++) {
+        for (var i = 0; i < reserved.length; i++) {
             if (name == reserved[i])
                 return validationFailure(errorText, "Username '" +
                                                     reserved[i] +
