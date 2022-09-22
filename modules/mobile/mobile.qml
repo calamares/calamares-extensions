@@ -280,42 +280,7 @@ Page
     }
     function validateUsername(username, errorText, extraReservedUsernames = []) {
         var name = username.text;
-        var reserved = [ /* FIXME: make configurable */
-            ...extraReservedUsernames,
-            "adm",
-            "at ",
-            "bin",
-            "colord",
-            "cron",
-            "cyrus",
-            "daemon",
-            "ftp",
-            "games",
-            "geoclue",
-            "guest",
-            "halt",
-            "lightdm",
-            "lp",
-            "mail",
-            "man",
-            "messagebus",
-            "news",
-            "nobody",
-            "ntp",
-            "operator",
-            "polkitd",
-            "postmaster",
-            "pulse",
-            "root",
-            "shutdown",
-            "smmsp",
-            "squid",
-            "sshd",
-            "sync",
-            "uucp",
-            "vpopmail",
-            "xfs"
-        ];
+        var reserved = config.reservedUsernames.concat(extraReservedUsernames);
 
         /* Validate characters */
         for (var i = 0; i < name.length; i++) {
