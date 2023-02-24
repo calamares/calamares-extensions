@@ -12,15 +12,17 @@ import QtQuick.Window 2.3
 import QtQuick.VirtualKeyboard 2.1
 
 Item {
-    property var placeholder: (config.userPasswordNumeric
+    property var passPlaceholder: (config.userPasswordNumeric
                                ? "PIN"
                                : "Password")
     property var hints: (config.userPasswordNumeric
                          ? Qt.ImhDigitsOnly
                          : Qt.ImhPreferLowercase)
-    property var validateFunc: (config.userPasswordNumeric
+    property var validatePassFunc: (config.userPasswordNumeric
                                 ? validatePin
                                 : validatePassword);
+
+    property var validateNameFunc: validateUsername;
 
 
     anchors.left: parent.left
@@ -30,9 +32,35 @@ Item {
     height: parent.height
 
     Text {
-        id: description
+        id: usernameDescription
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
+        anchors.topMargin: 30
+        wrapMode: Text.WordWrap
+
+        text: (function() {
+            return "Set the username of your user. The default" +
+                   " username is \"" + config.username + "\".";
+        }())
+
+        width: 500
+    }
+
+    TextField {
+        id: username
+        anchors.top: usernameDescription.bottom
+        placeholderText: qsTr("Username")
+        onTextChanged: validateNameFunc(username, errorText)
+        text: config.username
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 50
+        width: 500
+    }
+
+    Text {
+        id: userPassDescription
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: username.bottom
         anchors.topMargin: 30
         wrapMode: Text.WordWrap
 
@@ -53,10 +81,10 @@ Item {
 
     TextField {
         id: userPass
-        anchors.top: description.bottom
-        placeholderText: qsTr(placeholder)
+        anchors.top: userPassDescription.bottom
+        placeholderText: qsTr(passPlaceholder)
         echoMode: TextInput.Password
-        onTextChanged: validateFunc(userPass, userPassRepeat, errorText)
+        onTextChanged: validatePassFunc(userPass, userPassRepeat, errorText)
         text: config.userPassword
 
         /* Let the virtual keyboard change to digits only */
@@ -75,10 +103,10 @@ Item {
     TextField {
         id: userPassRepeat
         anchors.top: userPass.bottom
-        placeholderText: qsTr(placeholder + " (repeat)")
+        placeholderText: qsTr(passPlaceholder + " (repeat)")
         inputMethodHints: hints
         echoMode: TextInput.Password
-        onTextChanged: validateFunc(userPass, userPassRepeat, errorText)
+        onTextChanged: validatePassFunc(userPass, userPassRepeat, errorText)
         text: config.userPassword
 
         anchors.horizontalCenter: parent.horizontalCenter
@@ -105,8 +133,9 @@ Item {
 
         text: qsTr("Continue")
         onClicked: {
-            if (validateFunc(userPass, userPassRepeat, errorText)) {
+            if (validatePassFunc(userPass, userPassRepeat, errorText) && validateNameFunc(username, errorText)) {
                 config.userPassword = userPass.text;
+                config.username = username.text;
                 navNext();
             }
         }

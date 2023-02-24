@@ -253,7 +253,7 @@ Page
         return true;
     }
 
-    /* Input validation: user-screens (user_pass, ssh_credentials) */
+    /* Input validation: user-screens (fde_pass, user_pass, ssh_credentials) */
     function validatePin(userPin, userPinRepeat, errorText) {
         var pin = userPin.text;
         var repeat = userPinRepeat.text;
@@ -278,47 +278,12 @@ Page
 
         return validationFailureClear(errorText);
     }
-    function validateSshdUsername(username, errorText) {
+    function validateUsername(username, errorText, extraReservedUsernames = []) {
         var name = username.text;
-        var reserved = [ /* FIXME: make configurable */
-            config.username,
-            "adm",
-            "at ",
-            "bin",
-            "colord",
-            "cron",
-            "cyrus",
-            "daemon",
-            "ftp",
-            "games",
-            "geoclue",
-            "guest",
-            "halt",
-            "lightdm",
-            "lp",
-            "mail",
-            "man",
-            "messagebus",
-            "news",
-            "nobody",
-            "ntp",
-            "operator",
-            "polkitd",
-            "postmaster",
-            "pulse",
-            "root",
-            "shutdown",
-            "smmsp",
-            "squid",
-            "sshd",
-            "sync",
-            "uucp",
-            "vpopmail",
-            "xfs",
-        ]
+        var reserved = config.reservedUsernames.concat(extraReservedUsernames);
 
         /* Validate characters */
-        for (var i=0; i<name.length; i++) {
+        for (var i = 0; i < name.length; i++) {
             if (i) {
                 if (!name[i].match(/^[a-z0-9_-]$/))
                     return validationFailure(errorText,
@@ -335,15 +300,19 @@ Page
         }
 
         /* Validate against reserved usernames */
-        for (var i=0;i<reserved.length;i++) {
+        for (var i = 0; i < reserved.length; i++) {
             if (name == reserved[i])
                 return validationFailure(errorText, "Username '" +
                                                     reserved[i] +
-                                                    "' is reserved.")
+                                                    "' is reserved.");
         }
 
         /* Passed */
         return validationFailureClear(errorText);
+    }
+
+    function validateSshdUsername(username, errorText) {
+        return validateUsername(username, errorText, [config.username]);
     }
     function validateSshdPassword(password, passwordRepeat, errorText) {
         var pass = password.text;
@@ -365,8 +334,6 @@ Page
 
         return validationFailureClear(errorText);
     }
-
-    /* Input validation: fde_pass */
     function check_chars(input) {
         for (var i = 0; i < input.length; i++) {
             if (allowed_chars.indexOf(input[i]) == -1)
