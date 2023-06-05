@@ -321,10 +321,10 @@ Page
         if (pass == "")
             return validationFailure(errorText);
 
-        if (pass.length < 8)
+        if (pass.length < 6)
             return validationFailure(errorText,
-                                     "Too short: needs at least 8" +
-                                     " characters.");
+                                     "Too short: needs at least 6" +
+                                     " digits/characters.");
 
         if (repeat == "")
             return validationFailure(errorText);
@@ -374,10 +374,10 @@ Page
                                      "\n" +
                                      allowed_chars_multiline());
 
-        if (pass.length < 8)
+        if (pass.length < 6)
             return validationFailure(errorText,
-                                     "Too short: needs at least 8" +
-                                     " characters.");
+                                     "Too short: needs at least 6" +
+                                     " digits/characters.");
 
         if (repeat == "")
             return validationFailure(errorText);
