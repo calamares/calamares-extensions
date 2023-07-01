@@ -22,13 +22,13 @@ Item {
         id: mainText
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 30
+        anchors.topMargin: 25
         wrapMode: Text.WordWrap
 
         text: (function() {
             var ret = "Once you hit 'install', the installation will begin." +
                 " It will typically take a few minutes. Do not power off the" +
-                " device until it is done.<br><br>";
+                " device until it is done.<br>";
 
             if (config.installFromExternalToInternal) {
                 ret += "<b>After the installation, your device will shutdown" +
@@ -44,14 +44,14 @@ Item {
             return ret;
         }())
 
-        width: 500
+        width: 550
     }
 
     Button {
         id: firstButton
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: mainText.bottom
-        anchors.topMargin: 40
+        anchors.topMargin: 20
         width: 500
 
         text: qsTr("Install")
