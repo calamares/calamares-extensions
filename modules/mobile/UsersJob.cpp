@@ -14,6 +14,7 @@
 
 UsersJob::UsersJob( bool featureSshd,
                     const QString& cmdPasswd,
+                    const QString& cmdUsermod,
                     const QString& cmdSshd,
                     const QString& cmdSshdUseradd,
                     bool isSshEnabled,
@@ -24,6 +25,7 @@ UsersJob::UsersJob( bool featureSshd,
     : Calamares::Job()
     , m_featureSshd( featureSshd )
     , m_cmdPasswd( cmdPasswd )
+    , m_cmdUsermod( cmdUsermod )
     , m_cmdSshd( cmdSshd )
     , m_cmdSshdUseradd( cmdSshdUseradd )
     , m_isSshEnabled( isSshEnabled )
@@ -51,6 +53,8 @@ UsersJob::exec()
     QList< QPair< QStringList, QString > > commands = {
         { { "sh", "-c", m_cmdPasswd + " " + m_username }, m_password + "\n" + m_password + "\n" },
     };
+
+    commands.append( { { "sh", "-c", m_cmdUsermod }, m_username + "\n" } );
 
     if ( m_featureSshd )
     {

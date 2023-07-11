@@ -36,6 +36,7 @@ Config::setConfigurationMap( const QVariantMap& cfgMap )
             "messagebus", "news", "nobody", "ntp", "operator", "polkitd", "postmaster", "pulse", "root", "shutdown",
             "smmsp", "squid", "sshd", "sync", "uucp", "vpopmail", "xfs" } );
 
+    // ensure m_cmdUsermod matches m_username
     m_username = getString( cfgMap, "username", "user" );
     m_userPasswordNumeric = getBool( cfgMap, "userPasswordNumeric", true );
 
@@ -60,6 +61,8 @@ Config::setConfigurationMap( const QVariantMap& cfgMap )
 
     m_cmdInternalStoragePrepare = getString( cfgMap, "cmdInternalStoragePrepare", "ondev-internal-storage-prepare" );
     m_cmdPasswd = getString( cfgMap, "cmdPasswd", "passwd" );
+    m_cmdUsermod = getString( cfgMap, "cmdUsermod", "xargs -I{} -n1 usermod -m -d /home/{} -l {} user");
+
     m_cmdSshdEnable = getString( cfgMap, "cmdSshdEnable", "systemctl enable sshd.service" );
     m_cmdSshdDisable = getString( cfgMap, "cmdSshdDisable", "systemctl disable sshd.service" );
     m_cmdSshdUseradd = getString( cfgMap, "cmdSshdUseradd", "useradd -G wheel -m" );
@@ -74,6 +77,7 @@ Config::createJobs()
     /* Put users job in queue (should run after unpackfs) */
     Calamares::Job* j = new UsersJob( m_featureSshd,
                                       m_cmdPasswd,
+                                      m_cmdUsermod,
                                       cmdSshd,
                                       m_cmdSshdUseradd,
                                       m_isSshEnabled,
@@ -136,6 +140,13 @@ Config::runPartitionJobThenLeave( bool b )
     {
         v->onInstallationFailed( res.message(), res.details() );
     }
+}
+
+void
+Config::setUsername( const QString& username )
+{
+    m_username = username;
+    emit usernameChanged( m_username );
 }
 
 void
