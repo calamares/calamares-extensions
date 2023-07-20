@@ -51,10 +51,10 @@ UsersJob::exec()
     using namespace std;
 
     QList< QPair< QStringList, QString > > commands = {
-        { { "sh", "-c", m_cmdPasswd + " " + m_username }, m_password + "\n" + m_password + "\n" },
+        { { "sh", "-c", m_cmdUsermod }, m_username + "\n" }
     };
 
-    commands.append( { { "sh", "-c", m_cmdUsermod }, m_username + "\n" } );
+    commands.append( { { "sh", "-c", m_cmdPasswd + " " + m_username }, m_password + "\n" + m_password + "\n" } );
 
     if ( m_featureSshd )
     {
