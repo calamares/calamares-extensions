@@ -122,6 +122,7 @@ calamares_add_module_subdirectory( modules/os-nixos LIST_SKIPPED_MODULES )
 calamares_add_module_subdirectory( modules/refind LIST_SKIPPED_MODULES )
 calamares_add_module_subdirectory( modules/slowpython LIST_SKIPPED_MODULES )  # Python job
 calamares_add_module_subdirectory( modules/unpackfsc LIST_SKIPPED_MODULES )
+calamares_add_module_subdirectory( modules/flatpakinfo LIST_SKIPPED_MODULES )
 
 message(STATUS "Calamares extensions ${CALAMARES_EXTENSIONS_VERSION} for Calamares version ${Calamares_VERSION}")
 
