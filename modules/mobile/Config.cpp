@@ -61,7 +61,7 @@ Config::setConfigurationMap( const QVariantMap& cfgMap )
 
     m_cmdInternalStoragePrepare = getString( cfgMap, "cmdInternalStoragePrepare", "ondev-internal-storage-prepare" );
     m_cmdPasswd = getString( cfgMap, "cmdPasswd", "passwd" );
-    m_cmdUsermod = getString( cfgMap, "cmdUsermod", "xargs -I{} -n1 usermod -m -d /home/{} -l {} user");
+    m_cmdUsermod = getString( cfgMap, "cmdUsermod", "xargs -I{} -n1 usermod -m -d /home/{} -l {} -c {} user");
 
     m_cmdSshdEnable = getString( cfgMap, "cmdSshdEnable", "systemctl enable sshd.service" );
     m_cmdSshdDisable = getString( cfgMap, "cmdSshdDisable", "systemctl disable sshd.service" );
