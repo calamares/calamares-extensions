@@ -24,7 +24,7 @@ class Config : public QObject
     Q_PROPERTY( QStringList reservedUsernames READ reservedUsernames CONSTANT FINAL )
 
     /* default user */
-    Q_PROPERTY( QString username READ username CONSTANT FINAL )
+    Q_PROPERTY( QString username READ username WRITE setUsername NOTIFY usernameChanged )
     Q_PROPERTY( QString userPassword READ userPassword WRITE setUserPassword NOTIFY userPasswordChanged )
     Q_PROPERTY( bool userPasswordNumeric READ userPasswordNumeric CONSTANT FINAL )
 
@@ -78,9 +78,10 @@ public:
     /* reserved usernames (user_pass, ssh_credentials) */
     QStringList reservedUsernames() const { return m_reservedUsernames; };
 
-    /* default user */
+    /* user */
     QString username() const { return m_username; }
     QString userPassword() const { return m_userPassword; }
+    void setUsername( const QString& username );
     void setUserPassword( const QString& userPassword );
     bool userPasswordNumeric() const { return m_userPasswordNumeric; }
 
@@ -126,6 +127,7 @@ public:
 
     /* users job */
     QString cmdPasswd() const { return m_cmdPasswd; }
+    QString cmdUsermod() const { return m_cmdUsermod; }
     QString cmdSshdEnable() const { return m_cmdSshdEnable; }
     QString cmdSshdDisable() const { return m_cmdSshdDisable; }
     QString cmdSshdUseradd() const { return m_cmdSshdUseradd; }
@@ -181,6 +183,7 @@ private:
 
     /* users job */
     QString m_cmdPasswd;
+    QString m_cmdUsermod;
     QString m_cmdSshdEnable;
     QString m_cmdSshdDisable;
     QString m_cmdSshdUseradd;
@@ -190,6 +193,7 @@ signals:
 
     /* default user */
     void userPasswordChanged( QString userPassword );
+    void usernameChanged( QString username );
 
     /* ssh server + credentials */
     void sshdUsernameChanged( QString sshdUsername );

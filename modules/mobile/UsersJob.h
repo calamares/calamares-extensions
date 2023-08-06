@@ -10,6 +10,7 @@ class UsersJob : public Calamares::Job
 public:
     UsersJob( bool featureSshd,
               const QString& cmdPasswd,
+              const QString& cmdUsermod,
               const QString& cmdSshd,
               const QString& cmdSshdUseradd,
               bool isSshEnabled,
@@ -26,6 +27,7 @@ public:
 private:
     bool m_featureSshd;
     QString m_cmdPasswd;
+    QString m_cmdUsermod;
     QString m_cmdSshd;
     QString m_cmdSshdUseradd;
     bool m_isSshEnabled;
