@@ -148,7 +148,7 @@ test -n "$V" || { echo "Could not obtain version in $BUILDDIR ." ; exit 1 ; }
 # This is the signing key ID associated with the GitHub account adriaandegroot,
 # which is used to create all "verified" tags in the Calamares repo.
 #
-KEY_ID="CFDDC96F12B1915C"
+KEY_ID="328D742D8807A435"
 git tag -u "$KEY_ID" -m "Release v$V" "v$V" || { echo "Could not sign tag v$V." ; exit 1 ; }
 
 ### Create the tarball
