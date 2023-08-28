@@ -38,9 +38,9 @@
 # to print out version information. Use `cmake -DVERSION_STYLE=short`
 # to get just the short versioning.
 #
-cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-set( CALAMARES_EXTENSIONS_VERSION 1.3.2 )
+set( CALAMARES_EXTENSIONS_VERSION 1.4.0 )
 
 include( ${CMAKE_CURRENT_LIST_DIR}/CMakeModules/ExtendedVersion.cmake )
 if ( CMAKE_SCRIPT_MODE_FILE )
@@ -60,7 +60,7 @@ set( CMAKE_CXX_STANDARD_REQUIRED ON )
 # consumers by loading the developer's config from a build
 # directory (which doesn't have the rest of the config
 # installed inside it).
-set( CALAMARES_VERSION_REQUIRED 3.2.46 )
+set( CALAMARES_VERSION_REQUIRED 3.3.0 )
 find_package(Calamares ${CALAMARES_VERSION_REQUIRED} NO_CMAKE_PACKAGE_REGISTRY)
 if (NOT TARGET Calamares::calamares OR NOT TARGET Calamares::calamaresui)
     find_package(Calamares ${CALAMARES_VERSION_REQUIRED} REQUIRED)
