@@ -66,6 +66,10 @@ if (NOT TARGET Calamares::calamares OR NOT TARGET Calamares::calamaresui)
     find_package(Calamares ${CALAMARES_VERSION_REQUIRED} REQUIRED)
 endif()
 
+message(STATUS "Found Calamares version ${Calamares_VERSION}")
+message(STATUS "              libraries ${Calamares_LIB_DIRS}")
+message(STATUS "")
+
 ### CMAKE SETUP
 #
 # Enable IN_LIST
@@ -118,6 +122,8 @@ calamares_add_module_subdirectory( modules/os-nixos LIST_SKIPPED_MODULES )
 calamares_add_module_subdirectory( modules/refind LIST_SKIPPED_MODULES )
 calamares_add_module_subdirectory( modules/slowpython LIST_SKIPPED_MODULES )  # Python job
 calamares_add_module_subdirectory( modules/unpackfsc LIST_SKIPPED_MODULES )
+
+message(STATUS "Calamares extensions ${CALAMARES_EXTENSIONS_VERSION} for Calamares version ${Calamares_VERSION}")
 
 # If modules cannot be built, they usually call a macro
 # which builds a list of explanations; show that list.
