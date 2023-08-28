@@ -10,7 +10,7 @@
 # NOTE: this is largely a copy of the release script for Calamares,
 #       with not-applicable parts (such as translation-freeze) either
 #       commented-out, or skipped with if(false).
-# NOTE: this script contains Linuxisms (in particular, expects GNU mktemp(1))
+# NOTE: this script may contain Linuxisms
 #
 # This attempts to perform the different steps of the RELEASE.md
 # document automatically. It's not tested on other machines or
@@ -93,7 +93,7 @@ fi
 ### Setup
 #
 #
-BUILDDIR=$(mktemp -d --suffix=-build --tmpdir=.)
+BUILDDIR=$(mktemp -d -p . -t build.XXXXX)
 
 ### Build with default compiler
 #
@@ -167,7 +167,7 @@ gpg -s -u $KEY_ID --detach --armor $TAR_FILE  # Sign the tarball
 #
 #
 D=$(date +%Y%m%d-%H%M%S)
-TMPDIR=$(mktemp -d --suffix="-calamares-$D")
+TMPDIR=$(mktemp -d -p . -t calamares.XXXXX)
 test -d "$TMPDIR" || { echo "Could not create tarball-build directory." ; exit 1 ; }
 tar xzf "$TAR_FILE" -C "$TMPDIR" || { echo "Could not unpack tarball." ; exit 1 ; }
 test -d "$TMPDIR/$TAR_V" || { echo "Tarball did not contain source directory." ; exit 1 ; }
