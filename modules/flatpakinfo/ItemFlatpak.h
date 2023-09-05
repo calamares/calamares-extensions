@@ -43,5 +43,6 @@ private:
 
 
 PackageItem fromFlatpak( const QVariantMap& map );
+void ItemFlatpak_freeMem(void);
 
 #endif

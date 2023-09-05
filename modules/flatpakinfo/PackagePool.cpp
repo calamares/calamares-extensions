@@ -26,34 +26,60 @@ void downloadPackagesInfo(void)
 {
     int pid;
     int pipefd[2];
-    bool poolOk = false;
-    pipe(pipefd);
 
-    pid = fork();
-    if (0 == pid)
+    int pid_;
+    int pipefd_[2];
+    bool poolOk = false;
+
+    pipe(pipefd_);
+
+    pid_ = fork();
+    if (0 == pid_)
     {
-        close(pipefd[0]);
-        dup2(pipefd[1], 1);
-        execlp("flatpak", "flatpak", "search", "--columns=application", "", NULL);
-        exit(1);
+      close(pipefd_[0]);
+      dup2(pipefd_[1], 1);
+
+      execlp("flatpak", "flatpak", "remotes", "--columns=name", NULL);
+      exit(1);
     }
-    close(pipefd[1]);
+    close(pipefd_[1]);
 
     std::string line;
-    __gnu_cxx::stdio_filebuf<char> filebuf(pipefd[0], std::ios::in);
+    __gnu_cxx::stdio_filebuf<char> filebuf(pipefd_[0], std::ios::in);
     std::istream stream(&filebuf);
 
     while (!stream.eof())
     {
-      getline(stream, line);
-      QVariantMap item_map;
+       getline(stream, line);
 
-      //std::cerr << line;
-      item_map.insert("appstream", QVariant(QString::fromStdString(line)));
-      item_map.insert("id", QVariant(QString::fromStdString(line)));
+       pipe(pipefd);
 
-      PackageItem item = fromFlatpak(item_map);
-      packages.append(item);
+       pid = fork();
+       if (0 == pid)
+       {
+          close(pipefd[0]);
+          dup2(pipefd[1], 1);
+          execlp("flatpak", "flatpak", "remote-ls", "--app", "--columns=application", line.c_str(), NULL);
+          exit(1);
+       }
+      close(pipefd[1]);
+
+      std::string line;
+      __gnu_cxx::stdio_filebuf<char> filebuf(pipefd[0], std::ios::in);
+      std::istream stream(&filebuf);
+
+      while (!stream.eof())
+      {
+        getline(stream, line);
+        QVariantMap item_map;
+
+        //std::cerr << line;
+        item_map.insert("appstream", QVariant(QString::fromStdString(line)));
+        item_map.insert("id", QVariant(QString::fromStdString(line)));
+
+        PackageItem item = fromFlatpak(item_map);
+        packages.append(item);
+    }
     }
 
     waitpid(pid, nullptr, 0);

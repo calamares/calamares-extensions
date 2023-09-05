@@ -22,13 +22,16 @@
 #include <unistd.h>
 
 #include "PackagePool.h"
+#include "ItemFlatpak.h"
 
 FlatpakInfoJob::FlatpakInfoJob( QObject* parent )
     : Calamares::CppJob( parent )
 {
 }
 
-FlatpakInfoJob::~FlatpakInfoJob() {}
+FlatpakInfoJob::~FlatpakInfoJob() {
+    ItemFlatpak_freeMem();
+}
 
 QString
 FlatpakInfoJob::prettyName() const
