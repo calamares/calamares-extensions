@@ -73,6 +73,10 @@ void downloadPackagesInfo(void)
         getline(stream, line);
         QVariantMap item_map;
 
+        if (std::string::npos == line.find('.')) {
+            continue;
+        }
+
         //std::cerr << line;
         item_map.insert("appstream", QVariant(QString::fromStdString(line)));
         item_map.insert("id", QVariant(QString::fromStdString(line)));
