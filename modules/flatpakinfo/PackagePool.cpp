@@ -83,6 +83,7 @@ void serializePackagesInfo(void)
                {
                  newValue.insert("selected", true);
                  newValue.insert("immutable", true);
+                 newValue.insert("description", "[Already installed; cannot be uninstalled]");
                }
                else
                {
