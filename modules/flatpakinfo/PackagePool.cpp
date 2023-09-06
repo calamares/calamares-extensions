@@ -107,8 +107,16 @@ void serializePackagesInfo(void)
                QStringList selfInstall;
                QVariantMap newValue;
                newValue.insert("name", current.getAppStreamId());
-               newValue.insert("selected", false);
 
+               if (current.getInstalled())
+               {
+                 newValue.insert("selected", true);
+                 newValue.insert("immutable", true);
+               }
+               else
+               {
+                 newValue.insert("selected", false);
+               }
                selfInstall.append(current.getAppStreamId());
                newValue.insert("packages", selfInstall);
                changedValue.append(newValue);
