@@ -107,7 +107,7 @@ void serializePackagesInfo(void)
                QStringList selfInstall;
                QVariantMap newValue;
                newValue.insert("name", current.getAppStreamId());
-               newValue.insert("selected", "false");
+               newValue.insert("selected", false);
 
                selfInstall.append(current.getAppStreamId());
                newValue.insert("packages", selfInstall);
