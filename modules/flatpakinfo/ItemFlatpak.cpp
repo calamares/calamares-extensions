@@ -58,16 +58,13 @@ fromFlatpak( const QVariantMap& item_map )
    }
    // check if it is installed
    PackageItem item(CalamaresUtils::getString( item_map, "appstream" ));
+   item.setInstalled(false);
 
    for (auto names: installed)
    {
       if (names == CalamaresUtils::getString( item_map, "appstream" ))
       {
         item.setInstalled(true);
-      }
-      else
-      {
-        item.setInstalled(false);
       }
    }
 
