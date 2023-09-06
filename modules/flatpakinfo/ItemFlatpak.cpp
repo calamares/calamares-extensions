@@ -10,6 +10,8 @@
 #include "utils/Variant.h"
 #include "ItemFlatpak.h"
 
+#include "utils/CalamaresUtilsSystem.h"
+
 QStringList installed;
 bool installedFilled;
 
@@ -19,27 +21,14 @@ static void fill_installed()
     int pipefd_[2];
     bool poolOk = false;
 
-    pipe(pipefd_);
+    QString line;
+    auto process = CalamaresUtils::System::instance()->targetEnvCommand( QStringList { QString::fromStdString( "flatpak" ), QString::fromStdString( "list" ), QString::fromStdString("--app"), QString::fromStdString( "--columns=application" ) });
+    auto output_str = process.second;
+    QTextStream output(&output_str);
 
-    pid_ = fork();
-    if (0 == pid_)
+    while (output.readLineInto(&line))
     {
-      close(pipefd_[0]);
-      dup2(pipefd_[1], 1);
-
-      execlp("flatpak", "flatpak", "list", "--app", "--columns=application", NULL);
-      exit(1);
-    }
-    close(pipefd_[1]);
-
-    std::string line;
-    __gnu_cxx::stdio_filebuf<char> filebuf(pipefd_[0], std::ios::in);
-    std::istream stream(&filebuf);
-
-    while (!stream.eof())
-    {
-      getline(stream, line);
-      installed.append(QString::fromStdString(line));
+      installed.append(line);
     }
     installedFilled = true;
 }

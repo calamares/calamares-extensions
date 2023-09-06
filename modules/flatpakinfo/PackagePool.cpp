@@ -1,5 +1,4 @@
 
-#include <ext/stdio_filebuf.h>
 #include <fstream>
 #include <iostream>
 
@@ -18,75 +17,47 @@
 #include "ItemFlatpak.h"
 
 
+#include "utils/CalamaresUtilsSystem.h"
+
 void serializePackagesInfo(void);
 
 QVector < PackageItem > packages;
 
 void downloadPackagesInfo(void)
 {
-    int pid;
-    int pipefd[2];
+    QString line;
+    auto process = CalamaresUtils::System::instance()->targetEnvCommand( QStringList { QString::fromStdString( "flatpak" ), QString::fromStdString( "remotes" ), QString::fromStdString( "--columns=name" ) });
+    auto output_str = process.second;
+    QTextStream output(&output_str);
 
-    int pid_;
-    int pipefd_[2];
-    bool poolOk = false;
-
-    pipe(pipefd_);
-
-    pid_ = fork();
-    if (0 == pid_)
+    while (output.readLineInto(&line))
     {
-      close(pipefd_[0]);
-      dup2(pipefd_[1], 1);
+    QString line2;
+    auto process2 = CalamaresUtils::System::instance()->targetEnvCommand( QStringList { QString::fromStdString( "flatpak" ), QString::fromStdString( "remote-ls" ), QString::fromStdString( "--app" ), QString::fromStdString( "--columns=application" ), line });
+    auto output2_str = process2.second;
+    QTextStream output2(&output2_str);
 
-      execlp("flatpak", "flatpak", "remotes", "--columns=name", NULL);
-      exit(1);
-    }
-    close(pipefd_[1]);
-
-    std::string line;
-    __gnu_cxx::stdio_filebuf<char> filebuf(pipefd_[0], std::ios::in);
-    std::istream stream(&filebuf);
-
-    while (!stream.eof())
-    {
-       getline(stream, line);
-
-       pipe(pipefd);
-
-       pid = fork();
-       if (0 == pid)
-       {
-          close(pipefd[0]);
-          dup2(pipefd[1], 1);
-          execlp("flatpak", "flatpak", "remote-ls", "--app", "--columns=application", line.c_str(), NULL);
-          exit(1);
-       }
-      close(pipefd[1]);
-
-      std::string line;
-      __gnu_cxx::stdio_filebuf<char> filebuf(pipefd[0], std::ios::in);
-      std::istream stream(&filebuf);
-
-      while (!stream.eof())
+      while (output2.readLineInto(&line2))
       {
-        getline(stream, line);
+
+      if (line2 == "") {
+          continue;
+    }
         QVariantMap item_map;
 
-        if (std::string::npos == line.find('.')) {
+        if (-1 == line2.indexOf('.')) {
+
             continue;
         }
 
-        //std::cerr << line;
-        item_map.insert("appstream", QVariant(QString::fromStdString(line)));
-        item_map.insert("id", QVariant(QString::fromStdString(line)));
+        item_map.insert("appstream", QVariant(line2));
+        item_map.insert("id", QVariant(line2));
 
         PackageItem item = fromFlatpak(item_map);
         packages.append(item);
-    }
-    }
 
-    waitpid(pid, nullptr, 0);
+    }
+    }
 
     serializePackagesInfo();
 }
