@@ -17,10 +17,6 @@ bool installedFilled;
 
 static void fill_installed()
 {
-    int pid_;
-    int pipefd_[2];
-    bool poolOk = false;
-
     QString line;
     auto process = CalamaresUtils::System::instance()->targetEnvCommand( QStringList { QString::fromStdString( "flatpak" ), QString::fromStdString( "list" ), QString::fromStdString("--app"), QString::fromStdString( "--columns=application" ) });
     auto output_str = process.second;
