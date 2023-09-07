@@ -33,17 +33,16 @@ void downloadPackagesInfo(void)
 
     while (output.readLineInto(&line))
     {
-    QString line2;
-    auto process2 = CalamaresUtils::System::instance()->targetEnvCommand( QStringList { QString::fromStdString( "flatpak" ), QString::fromStdString( "remote-ls" ), QString::fromStdString( "--app" ), QString::fromStdString( "--columns=application" ), line });
-    auto output2_str = process2.second;
-    QTextStream output2(&output2_str);
+      QString line2;
+      auto process2 = CalamaresUtils::System::instance()->targetEnvCommand( QStringList { QString::fromStdString( "flatpak" ), QString::fromStdString( "remote-ls" ), QString::fromStdString( "--app" ), QString::fromStdString( "--columns=application" ), line });
+      auto output2_str = process2.second;
+      QTextStream output2(&output2_str);
 
       while (output2.readLineInto(&line2))
       {
-
-      if (line2 == "") {
-          continue;
-    }
+        if (line2 == "") {
+            continue;
+        }
         QVariantMap item_map;
 
         if (addedPackages.contains(line2)) {
@@ -57,8 +56,7 @@ void downloadPackagesInfo(void)
 
         PackageItem item = fromFlatpak(item_map);
         packages.append(item);
-
-    }
+      }
     }
 
     serializePackagesInfo();
