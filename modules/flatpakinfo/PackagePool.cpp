@@ -25,6 +25,7 @@ QVector < PackageItem > packages;
 
 void downloadPackagesInfo(void)
 {
+    QHash<QString,bool> addedPackages;
     QString line;
     auto process = CalamaresUtils::System::instance()->targetEnvCommand( QStringList { QString::fromStdString( "flatpak" ), QString::fromStdString( "remotes" ), QString::fromStdString( "--columns=name" ) });
     auto output_str = process.second;
@@ -49,6 +50,12 @@ void downloadPackagesInfo(void)
 
             continue;
         }
+
+        if (addedPackages.contains(line2)) {
+            continue;
+        }
+
+        addedPackages.insert(line2, true);
 
         item_map.insert("appstream", QVariant(line2));
         item_map.insert("id", QVariant(line2));
