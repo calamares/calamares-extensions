@@ -46,11 +46,6 @@ void downloadPackagesInfo(void)
     }
         QVariantMap item_map;
 
-        if (-1 == line2.indexOf('.')) {
-
-            continue;
-        }
-
         if (addedPackages.contains(line2)) {
             continue;
         }
