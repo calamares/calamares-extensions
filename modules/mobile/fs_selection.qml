@@ -22,21 +22,21 @@ Item {
         id: mainText
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 30
+        anchors.topMargin: 10
         wrapMode: Text.WordWrap
 
         text: "Select the filesystem for root partition. If unsure, leave the default."
 
-        width: 500
+        width: 200
     }
 
     ComboBox {
         id: fsTypeCB
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: mainText.bottom
-        anchors.topMargin: 40
-        width: 500
-        height: 60
+        anchors.topMargin: 10
+        width: 150
+        height: 30
         editable: false
         model: config.fsList
         /* Save the current state on selection so it is there when the back button is pressed */
@@ -47,8 +47,8 @@ Item {
     Button {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: fsTypeCB.bottom
-        anchors.topMargin: 40
-        width: 500
+        anchors.topMargin: 10
+        width: 200
 
         text: qsTr("Continue")
         onClicked: {

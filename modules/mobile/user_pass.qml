@@ -35,7 +35,7 @@ Item {
         id: usernameDescription
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 30
+        anchors.topMargin: 10
         wrapMode: Text.WordWrap
 
         text: (function() {
@@ -43,7 +43,7 @@ Item {
                    " username is \"" + config.username + "\".";
         }())
 
-        width: 500
+        width: 200
     }
 
     TextField {
@@ -53,15 +53,15 @@ Item {
         onTextChanged: validateNameFunc(username, errorText)
         text: config.username
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 50
-        width: 500
+        anchors.topMargin: 10
+        width: 200
     }
 
     Text {
         id: userPassDescription
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: username.bottom
-        anchors.topMargin: 30
+        anchors.topMargin: 10
         wrapMode: Text.WordWrap
 
         text: (function() {
@@ -76,7 +76,7 @@ Item {
             }
         }())
 
-        width: 500
+        width: 200
     }
 
     TextField {
@@ -96,8 +96,8 @@ Item {
         }
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 50
-        width: 500
+        anchors.topMargin: 10
+        width: 200
     }
 
     TextField {
@@ -110,8 +110,8 @@ Item {
         text: config.userPassword
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 50
-        width: 500
+        anchors.topMargin: 10
+        width: 200
     }
 
     Text {
@@ -121,15 +121,15 @@ Item {
         wrapMode: Text.WordWrap
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 50
-        width: 500
+        anchors.topMargin: 10
+        width: 200
     }
 
     Button {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: errorText.bottom
-        anchors.topMargin: 40
-        width: 500
+        anchors.topMargin: 10
+        width: 200
 
         text: qsTr("Continue")
         onClicked: {

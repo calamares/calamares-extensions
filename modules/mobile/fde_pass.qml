@@ -36,7 +36,7 @@ Item {
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 50
-        width: 500
+        width: 200
     }
 
     TextField {
@@ -49,8 +49,8 @@ Item {
         text: config.fdePassword
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 50
-        width: 500
+        anchors.topMargin: 10
+        width: 200
     }
 
     Text {
@@ -59,15 +59,15 @@ Item {
         visible: false
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 50
-        width: 500
+        anchors.topMargin: 10
+        width: 200
         wrapMode: Text.WordWrap
     }
     Button {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: errorText.bottom
-        anchors.topMargin: 40
-        width: 500
+        anchors.topMargin: 10
+        width: 200
 
         text: qsTr("Continue")
         onClicked: {

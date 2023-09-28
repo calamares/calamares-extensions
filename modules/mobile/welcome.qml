@@ -28,8 +28,8 @@ Page
                 id: logo
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
-                anchors.topMargin: 50
-                height: 250
+                anchors.topMargin: 10
+                height: 50
                 fillMode: Image.PreserveAspectFit
                 source: "file:///usr/share/calamares/branding/default-mobile/logo.png"
             }
@@ -37,7 +37,7 @@ Page
                 id: mainText
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: logo.bottom
-                anchors.topMargin: 50
+                anchors.topMargin: 10
                 horizontalAlignment: Text.AlignRight
                 text: "You are about to install<br>" +
                       "<b>" + config.osName +
@@ -48,14 +48,14 @@ Page
                       "<b>" + config.arch + "</b><br>" +
                       "on your " +
                       "<b>" + config.device + "</b><br>"
-                width: 500
+                width: 200
             }
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: mainText.bottom
-                anchors.topMargin: 50
-                width: 500
+                anchors.topMargin: 10
+                width: 200
 
                 text: qsTr("Continue")
                 onClicked: navNext()
