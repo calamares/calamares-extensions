@@ -26,8 +26,8 @@ Page
             id: logo
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: 50
-            height: 250
+            anchors.topMargin: 10
+            height: 50
             fillMode: Image.PreserveAspectFit
             source: "file:///usr/share/calamares/branding/default-mobile/logo.png"
         }
@@ -35,11 +35,11 @@ Page
             id: waitText
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: logo.bottom
-            anchors.topMargin: 150
+            anchors.topMargin: 50
             wrapMode: Text.WordWrap
             text: "Formatting and mounting target partition. This may" +
                   " take up to ten minutes, please be patient."
-            width: 500
+            width: 200
         }
     }
 }
