@@ -46,7 +46,7 @@ Page
                       "<b>" + config.userInterface + "</b><br>" +
                       "architecture " +
                       "<b>" + config.arch + "</b><br>" +
-                      "on your " +
+                      "on your <br>" +
                       "<b>" + config.device + "</b><br>"
                 width: 200
             }
