@@ -30,10 +30,10 @@ fillInstalled()
 {
     QString line;
     auto process = CalamaresUtils::System::instance()->targetEnvCommand(
-        QStringList { QString::fromStdString( "flatpak" ),
-                      QString::fromStdString( "list" ),
-                      QString::fromStdString( "--app" ),
-                      QString::fromStdString( "--columns=application" ) } );
+        QStringList { QString::fromLatin1( "flatpak" ),
+                      QString::fromLatin1( "list" ),
+                      QString::fromLatin1( "--app" ),
+                      QString::fromLatin1( "--columns=application" ) } );
     auto outputStr = process.second;
     QTextStream output( &outputStr );
 
