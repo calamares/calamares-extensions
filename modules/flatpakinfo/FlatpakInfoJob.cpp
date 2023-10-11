@@ -7,7 +7,7 @@
  *
  */
 
-#include "flatpakInfoJob.h"
+#include "FlatpakInfoJob.h"
 
 #include "utils/CalamaresUtilsSystem.h"
 #include "utils/Logger.h"

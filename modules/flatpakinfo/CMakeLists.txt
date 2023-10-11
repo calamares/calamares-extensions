@@ -10,10 +10,10 @@ calamares_add_plugin(flatpakInfo
     TYPE job
     EXPORT_MACRO PLUGINDLLEXPORT_PRO
     SOURCES
-        flatpakInfoJob.h
+        FlatpakInfoJob.h
         ItemFlatpak.h
         PackagePool.h
-        flatpakInfoJob.cpp
+        FlatpakInfoJob.cpp
         ItemFlatpak.cpp
         PackagePool.cpp
     SHARED_LIB
