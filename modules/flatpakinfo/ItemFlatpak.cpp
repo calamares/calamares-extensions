@@ -26,7 +26,7 @@ QStringList installed;
 bool installedFilled;
 
 static void
-fill_installed()
+fillInstalled()
 {
     QString line;
     auto process = CalamaresUtils::System::instance()->targetEnvCommand(
@@ -34,8 +34,8 @@ fill_installed()
                       QString::fromStdString( "list" ),
                       QString::fromStdString( "--app" ),
                       QString::fromStdString( "--columns=application" ) } );
-    auto output_str = process.second;
-    QTextStream output( &output_str );
+    auto outputStr = process.second;
+    QTextStream output( &outputStr );
 
     while ( output.readLineInto( &line ) )
     {
@@ -45,26 +45,26 @@ fill_installed()
 }
 
 void
-ItemFlatpak_freeMem( void )
+ItemFlatpakFreeMem( void )
 {
     installed.clear();
     installedFilled = false;
 }
 
 PackageItem
-fromFlatpak( const QVariantMap& item_map )
+fromFlatpak( const QVariantMap& itemMap )
 {
     if ( false == installedFilled )
     {
-        fill_installed();
+        fillInstalled();
     }
     // check if it is installed
-    PackageItem item( CalamaresUtils::getString( item_map, "appstream" ) );
+    PackageItem item( CalamaresUtils::getString( itemMap, "appstream" ) );
     item.setInstalled( false );
 
     for ( auto names : installed )
     {
-        if ( names == CalamaresUtils::getString( item_map, "appstream" ) )
+        if ( names == CalamaresUtils::getString( itemMap, "appstream" ) )
         {
             item.setInstalled( true );
         }

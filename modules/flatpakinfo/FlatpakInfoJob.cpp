@@ -31,7 +31,7 @@ FlatpakInfoJob::FlatpakInfoJob( QObject* parent )
 
 FlatpakInfoJob::~FlatpakInfoJob()
 {
-    ItemFlatpak_freeMem();
+    ItemFlatpakFreeMem();
 }
 
 QString

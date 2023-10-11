@@ -35,8 +35,8 @@ void downloadPackagesInfo(void)
     QHash<QString,bool> addedPackages;
     QString line;
     auto process = CalamaresUtils::System::instance()->targetEnvCommand( QStringList { QString::fromStdString( "flatpak" ), QString::fromStdString( "remotes" ), QString::fromStdString( "--columns=name" ) });
-    auto output_str = process.second;
-    QTextStream output(&output_str);
+    auto outputStr = process.second;
+    QTextStream output(&outputStr);
 
     while (output.readLineInto(&line))
     {
@@ -47,8 +47,8 @@ void downloadPackagesInfo(void)
                           QString::fromStdString( "--app" ),
                           QString::fromStdString( "--columns=application" ),
                           line } );
-        auto output2_str = process2.second;
-        QTextStream output2( &output2_str );
+        auto output2Str = process2.second;
+        QTextStream output2( &output2Str );
 
         while ( output2.readLineInto( &line2 ) )
         {
@@ -56,7 +56,7 @@ void downloadPackagesInfo(void)
             {
                 continue;
             }
-            QVariantMap item_map;
+            QVariantMap itemMap;
 
             if ( addedPackages.contains( line2 ) )
             {
@@ -65,10 +65,10 @@ void downloadPackagesInfo(void)
 
             addedPackages.insert( line2, true );
 
-            item_map.insert( "appstream", QVariant( line2 ) );
-            item_map.insert( "id", QVariant( line2 ) );
+            itemMap.insert( "appstream", QVariant( line2 ) );
+            itemMap.insert( "id", QVariant( line2 ) );
 
-            PackageItem item = fromFlatpak( item_map );
+            PackageItem item = fromFlatpak( itemMap );
             packages.append( item );
         }
     }
