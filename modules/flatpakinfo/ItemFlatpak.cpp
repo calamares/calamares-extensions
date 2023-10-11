@@ -7,19 +7,20 @@
  *
  */
 
+/* Qt */
 #include <QVariantMap>
-#include <sys/wait.h>
-#include <unistd.h>
 
-#include <ext/stdio_filebuf.h>
+/* CPP */
 #include <fstream>
 #include <iostream>
 
+/* Calamares */
+#include "utils/CalamaresUtilsSystem.h"
+
+/* Module */
 #include "ItemFlatpak.h"
 #include "utils/Logger.h"
 #include "utils/Variant.h"
-
-#include "utils/CalamaresUtilsSystem.h"
 
 QStringList installed;
 bool installedFilled;
