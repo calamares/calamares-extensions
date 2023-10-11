@@ -72,13 +72,7 @@ fromFlatpak( const QVariantMap& itemMap )
     PackageItem item( CalamaresUtils::getString( itemMap, "appstream" ) );
     item.setInstalled( false );
 
-    for ( auto names : installed )
-    {
-        if ( names == CalamaresUtils::getString( itemMap, "appstream" ) )
-        {
-            item.setInstalled( true );
-        }
-    }
+    item.setInstalled( installed.contains( CalamaresUtils::getString( itemMap, "appstream" ) ) );
 
     return item;
 }
