@@ -22,9 +22,9 @@ public:
         , installed( false )
     {
     }
-    QString& getAppStreamId( void ) { return appstreamid; }
+    QString& getAppStreamId( ) { return appstreamid; }
     void setInstalled( bool installed ) { this->installed = installed; }
-    bool getInstalled( void ) { return installed; }
+    bool getInstalled( ) { return installed; }
 
 private:
     QString appstreamid;
