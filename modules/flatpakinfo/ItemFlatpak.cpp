@@ -28,6 +28,8 @@ bool installedFilled;
 static void
 fillInstalled()
 {
+    long long int prev_pos;
+    long long int pos = 0;
     QString line;
     auto process = CalamaresUtils::System::instance()->targetEnvCommand(
         QStringList { QString::fromLatin1( "flatpak" ),
@@ -35,12 +37,20 @@ fillInstalled()
                       QString::fromLatin1( "--app" ),
                       QString::fromLatin1( "--columns=application" ) } );
     auto outputStr = process.second;
-    QTextStream output( &outputStr );
 
-    while ( output.readLineInto( &line ) )
-    {
-        installed.append( line );
-    }
+    do {
+        prev_pos = pos;
+
+        pos = outputStr.indexOf('\n', prev_pos);
+        QString line = outputStr.mid(prev_pos, pos);
+        installed.append(line);
+
+        /* Increase by 1 to not stuck on newline */
+        ++pos;
+
+    /* QString::indexOf returns -1 since no occurences. 0 = -1 + 1.*/
+    } while (0 != pos);
+
     installedFilled = true;
 }
 
