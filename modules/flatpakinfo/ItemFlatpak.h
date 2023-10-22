@@ -18,17 +18,17 @@ class PackageItem
 {
 public:
     PackageItem( QString appstreamid )
-        : appstreamid( appstreamid )
-        , installed( false )
+        : m_appstreamid( appstreamid )
+        , m_installed( false )
     {
     }
-    QString getAppStreamId( ) const { return appstreamid; }
-    void setInstalled( bool installed )  { this->installed = installed; }
-    bool getInstalled( ) const { return installed; }
+    QString getAppStreamId( ) const { return m_appstreamid; }
+    void setInstalled( bool installed )  { m_installed = installed; }
+    bool getInstalled( ) const { return m_installed; }
 
 private:
-    QString appstreamid;
-    bool installed;
+    QString m_appstreamid;
+    bool m_installed;
 };
 
 
