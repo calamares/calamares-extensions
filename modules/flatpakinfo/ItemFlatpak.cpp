@@ -23,9 +23,8 @@
 #include "utils/Variant.h"
 
 QStringList installed;
-bool installedFilled;
 
-static void
+void
 fillInstalled()
 {
     long long int prev_pos;
@@ -50,24 +49,17 @@ fillInstalled()
 
     /* QString::indexOf returns -1 since no occurences. 0 = -1 + 1.*/
     } while (0 != pos);
-
-    installedFilled = true;
 }
 
 void
 ItemFlatpakFreeMem( void )
 {
     installed.clear();
-    installedFilled = false;
 }
 
 PackageItem
 fromFlatpak( const QVariantMap& itemMap )
 {
-    if ( false == installedFilled )
-    {
-        fillInstalled();
-    }
     // check if it is installed
     PackageItem item( CalamaresUtils::getString( itemMap, "appstream" ) );
     item.setInstalled( false );

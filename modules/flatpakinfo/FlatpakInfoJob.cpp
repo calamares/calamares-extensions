@@ -48,6 +48,7 @@ FlatpakInfoJob::exec()
     Calamares::GlobalStorage* gs = Calamares::JobQueue::instance()->globalStorage();
 
 
+    fillInstalled();
     downloadPackagesInfo();
     serializePackagesInfo();
 

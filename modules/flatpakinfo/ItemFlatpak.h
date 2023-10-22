@@ -34,5 +34,5 @@ private:
 
 PackageItem fromFlatpak( const QVariantMap& map );
 void ItemFlatpakFreeMem( void );
-
+void fillInstalled();
 #endif
