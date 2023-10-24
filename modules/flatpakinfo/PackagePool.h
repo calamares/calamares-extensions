@@ -9,7 +9,8 @@
 #ifndef ___PACKAGEPOOL__H___
 #define ___PACKAGEPOOL__H___
 
-void downloadPackagesInfo( void );
+#include "ItemFlatpak.h"
+void downloadPackagesInfo( InstalledList& );
 void serializePackagesInfo( void );
 
 #endif

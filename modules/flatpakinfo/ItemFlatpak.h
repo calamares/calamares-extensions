@@ -31,8 +31,17 @@ private:
     bool m_installed;
 };
 
+class InstalledList {
+private:
+    QStringList installed;
+public:
+    InstalledList();
+    ~InstalledList();
 
-PackageItem fromFlatpak( const QVariantMap& map );
-void ItemFlatpakFreeMem( void );
-void fillInstalled();
+    bool contains(QString string) {
+        return installed.contains(string);
+    }
+};
+
+PackageItem fromFlatpak( const QVariantMap& map, InstalledList &installed );
 #endif

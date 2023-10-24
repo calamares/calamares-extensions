@@ -29,11 +29,6 @@ FlatpakInfoJob::FlatpakInfoJob( QObject* parent )
 {
 }
 
-FlatpakInfoJob::~FlatpakInfoJob()
-{
-    ItemFlatpakFreeMem();
-}
-
 QString
 FlatpakInfoJob::prettyName() const
 {
@@ -47,9 +42,7 @@ FlatpakInfoJob::exec()
     QVariantList partitions;
     Calamares::GlobalStorage* gs = Calamares::JobQueue::instance()->globalStorage();
 
-
-    fillInstalled();
-    downloadPackagesInfo();
+    downloadPackagesInfo(IList);
     serializePackagesInfo();
 
     return Calamares::JobResult::ok();

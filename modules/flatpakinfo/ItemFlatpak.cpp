@@ -22,10 +22,19 @@
 #include "utils/Logger.h"
 #include "utils/Variant.h"
 
-QStringList installed;
+PackageItem
+fromFlatpak( const QVariantMap& itemMap, InstalledList &installed )
+{
+    // check if it is installed
+    PackageItem item( CalamaresUtils::getString( itemMap, "appstream" ) );
+    item.setInstalled( false );
 
-void
-fillInstalled()
+    item.setInstalled( installed.contains( CalamaresUtils::getString( itemMap, "appstream" ) ) );
+
+    return item;
+}
+
+InstalledList::InstalledList()
 {
     long long int prev_pos;
     long long int pos = 0;
@@ -51,20 +60,7 @@ fillInstalled()
     } while (0 != pos);
 }
 
-void
-ItemFlatpakFreeMem( void )
+InstalledList::~InstalledList()
 {
     installed.clear();
-}
-
-PackageItem
-fromFlatpak( const QVariantMap& itemMap )
-{
-    // check if it is installed
-    PackageItem item( CalamaresUtils::getString( itemMap, "appstream" ) );
-    item.setInstalled( false );
-
-    item.setInstalled( installed.contains( CalamaresUtils::getString( itemMap, "appstream" ) ) );
-
-    return item;
 }

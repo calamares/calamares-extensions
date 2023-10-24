@@ -15,6 +15,7 @@
 #include <QVariantMap>
 
 #include "CppJob.h"
+#include "ItemFlatpak.h"
 
 #include "utils/PluginFactory.h"
 
@@ -29,7 +30,8 @@ class PLUGINDLLEXPORT FlatpakInfoJob : public Calamares::CppJob
 
 public:
     explicit FlatpakInfoJob( QObject* parent = nullptr );
-    ~FlatpakInfoJob() override;
+
+    InstalledList IList;
 
     QString prettyName() const override;
 

@@ -30,7 +30,7 @@ void serializePackagesInfo(void);
 
 QVector < PackageItem > packages;
 
-void downloadPackagesInfo(void)
+void downloadPackagesInfo(InstalledList &list)
 {
     QHash<QString,bool> addedPackages;
     QString line;
@@ -68,7 +68,7 @@ void downloadPackagesInfo(void)
             itemMap.insert( "appstream", QVariant( line2 ) );
             itemMap.insert( "id", QVariant( line2 ) );
 
-            PackageItem item = fromFlatpak( itemMap );
+            PackageItem item = fromFlatpak( itemMap, list );
             packages.append( item );
         }
     }
@@ -76,7 +76,7 @@ void downloadPackagesInfo(void)
     serializePackagesInfo();
 }
 
-void serializePackagesInfo(void)
+void serializePackagesInfo()
 {
         QList<QVariant> changedValue;
         auto* gs = Calamares::JobQueue::instance()->globalStorage();
