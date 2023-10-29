@@ -16,6 +16,7 @@
 
 #include "CppJob.h"
 #include "ItemFlatpak.h"
+#include "PackagePool.h"
 
 #include "utils/PluginFactory.h"
 
@@ -27,7 +28,7 @@
 class PLUGINDLLEXPORT FlatpakInfoJob : public Calamares::CppJob
 {
     Q_OBJECT
-
+    PackagePool Pool;
 public:
     explicit FlatpakInfoJob( QObject* parent = nullptr );
 

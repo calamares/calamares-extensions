@@ -22,15 +22,11 @@
 #include "utils/Logger.h"
 #include "utils/Variant.h"
 #include "ItemFlatpak.h"
-
+#include "PackagePool.h"
 
 #include "utils/CalamaresUtilsSystem.h"
 
-void serializePackagesInfo(void);
-
-QVector < PackageItem > packages;
-
-void downloadPackagesInfo(InstalledList &list)
+void PackagePool::downloadPackagesInfo(InstalledList &list)
 {
     QHash<QString,bool> addedPackages;
     QString line;
@@ -76,7 +72,7 @@ void downloadPackagesInfo(InstalledList &list)
     serializePackagesInfo();
 }
 
-void serializePackagesInfo()
+void PackagePool::serializePackagesInfo()
 {
         QList<QVariant> changedValue;
         auto* gs = Calamares::JobQueue::instance()->globalStorage();

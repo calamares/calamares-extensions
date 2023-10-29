@@ -22,7 +22,6 @@
 #include <unistd.h>
 
 #include "ItemFlatpak.h"
-#include "PackagePool.h"
 
 FlatpakInfoJob::FlatpakInfoJob( QObject* parent )
     : Calamares::CppJob( parent )
@@ -42,8 +41,8 @@ FlatpakInfoJob::exec()
     QVariantList partitions;
     Calamares::GlobalStorage* gs = Calamares::JobQueue::instance()->globalStorage();
 
-    downloadPackagesInfo(IList);
-    serializePackagesInfo();
+    Pool.downloadPackagesInfo(IList);
+    Pool.serializePackagesInfo();
 
     return Calamares::JobResult::ok();
 }

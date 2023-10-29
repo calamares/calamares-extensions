@@ -10,7 +10,14 @@
 #define ___PACKAGEPOOL__H___
 
 #include "ItemFlatpak.h"
-void downloadPackagesInfo( InstalledList& );
-void serializePackagesInfo( void );
+
+class PackagePool {
+private:
+    QVector < PackageItem > packages;
+public:
+    void downloadPackagesInfo( InstalledList& );
+    void serializePackagesInfo( void );
+};
+
 
 #endif
