@@ -22,7 +22,7 @@ Item {
         id: mainText
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 30
+        anchors.topMargin: 10
         wrapMode: Text.WordWrap
 
         text: "The installation was started from an external storage medium." +
@@ -32,15 +32,15 @@ Item {
               "<br>" +
               "Where would you like to install " + config.osName + "?"
 
-        width: 500
+        width: 200
     }
 
     Button {
         id: firstButton
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: mainText.bottom
-        anchors.topMargin: 40
-        width: 500
+        anchors.topMargin: 10
+        width: 200
 
         text: qsTr("Internal (eMMC)")
         onClicked: {
@@ -52,8 +52,8 @@ Item {
     Button {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: firstButton.bottom
-        anchors.topMargin: 40
-        width: 500
+        anchors.topMargin: 10
+        width: 200
 
         text: qsTr("External (SD card)")
         onClicked: {

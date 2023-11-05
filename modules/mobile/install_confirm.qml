@@ -22,7 +22,7 @@ Item {
         id: mainText
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 25
+        anchors.topMargin: 10
         wrapMode: Text.WordWrap
 
         text: (function() {
@@ -44,15 +44,15 @@ Item {
             return ret;
         }())
 
-        width: 550
+        width: 200
     }
 
     Button {
         id: firstButton
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: mainText.bottom
-        anchors.topMargin: 20
-        width: 500
+        anchors.topMargin: 10
+        width: 200
 
         text: qsTr("Install")
         onClicked: navFinish()

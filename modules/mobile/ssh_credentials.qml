@@ -34,7 +34,7 @@ Item {
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 50
-        width: 500
+        width: 200
     }
 
     Text {
@@ -45,7 +45,7 @@ Item {
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 50
-        width: 500
+        width: 200
     }
 
     TextField {
@@ -59,7 +59,7 @@ Item {
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 50
-        width: 500
+        width: 200
     }
 
     TextField {
@@ -73,7 +73,7 @@ Item {
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 50
-        width: 500
+        width: 200
     }
 
     Text {
@@ -84,13 +84,13 @@ Item {
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 50
-        width: 500
+        width: 200
     }
     Button {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: errorTextPassword.bottom
         anchors.topMargin: 40
-        width: 500
+        width: 200
 
         text: qsTr("Continue")
         onClicked: {

@@ -36,7 +36,7 @@ Item {
               "More information:<br>" +
               "https://postmarketos.org/ssh"
 
-        width: 500
+        width: 200
     }
 
     Button {
@@ -44,7 +44,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: mainText.bottom
         anchors.topMargin: 40
-        width: 500
+        width: 200
 
         text: qsTr("Enable")
         onClicked: {
@@ -57,7 +57,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: firstButton.bottom
         anchors.topMargin: 40
-        width: 500
+        width: 200
 
         text: qsTr("Disable")
         onClicked: {

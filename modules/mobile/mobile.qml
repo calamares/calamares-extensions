@@ -77,7 +77,7 @@ Page
             Rectangle {
                 id: mobileNavigation
                 width: parent.width
-                height: 60
+                height: 30
                 color: "#e6e4e1"
                 Layout.fillWidth: true
 
@@ -98,8 +98,8 @@ Page
                         text: "<"
 
                         background: Rectangle {
-                            implicitWidth: 32
-                            implicitHeight: 30
+                            implicitWidth: 10
+                            implicitHeight: 7
                             border.color: "#c1bab5"
                             border.width: 1
                             radius: 4
@@ -109,7 +109,7 @@ Page
                         onClicked: navBack()
                     }
                     Rectangle {
-                        implicitHeight: 30
+                        implicitHeight: 10
                         Layout.fillWidth: true
                         color: "#e6e4e1"
 
