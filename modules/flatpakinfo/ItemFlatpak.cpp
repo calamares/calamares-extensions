@@ -29,6 +29,7 @@ fromFlatpak( const QVariantMap& itemMap, InstalledList &installed )
     PackageItem item( CalamaresUtils::getString( itemMap, "appstream" ) );
     item.setInstalled( false );
 
+    // set to installed if appstream id of itemMap is inside installed list
     item.setInstalled( installed.contains( CalamaresUtils::getString( itemMap, "appstream" ) ) );
 
     return item;
