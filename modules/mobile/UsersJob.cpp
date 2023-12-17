@@ -5,7 +5,7 @@
 #include "GlobalStorage.h"
 #include "JobQueue.h"
 #include "Settings.h"
-#include "utils/CalamaresUtilsSystem.h"
+#include "utils/System.h"
 #include "utils/Logger.h"
 
 #include <QDir>
@@ -47,7 +47,7 @@ Calamares::JobResult
 UsersJob::exec()
 {
     using namespace Calamares;
-    using namespace CalamaresUtils;
+    using namespace Calamares;
     using namespace std;
 
     QList< QPair< QStringList, QString > > commands = {
