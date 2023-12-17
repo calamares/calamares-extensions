@@ -56,6 +56,28 @@ project(calamares-extensions
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 
+if(WITH_QT6)
+    set(kfname "KF6")
+    set(KF_VERSION 5.240) # KDE Neon weirdness
+else()
+    message(STATUS "Building Calamares with Qt5")
+    set(kfname "KF5")
+    set(KF_VERSION 5.78)
+    # API that was deprecated before Qt 5.15 causes a compile error
+    add_compile_definitions(QT_DISABLE_DEPRECATED_BEFORE=0x050f00)
+endif()
+
+include( FeatureSummary )
+find_package(${kfname}CoreAddons ${KF_VERSION} QUIET)
+set_package_properties(
+    ${kfname}CoreAddons
+    PROPERTIES
+    TYPE REQUIRED
+    DESCRIPTION "KDE Framework CoreAddons"
+    URL "https://api.kde.org/frameworks/"
+    PURPOSE "Essential Framework for AboutData and Macros"
+)
+
 # On developer's machine, the user package registry breaks
 # consumers by loading the developer's config from a build
 # directory (which doesn't have the rest of the config
