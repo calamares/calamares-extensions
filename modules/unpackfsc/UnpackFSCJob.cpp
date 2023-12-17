@@ -101,8 +101,8 @@ UnpackFSCJob::exec()
 void
 UnpackFSCJob::setConfigurationMap( const QVariantMap& map )
 {
-    QString source = CalamaresUtils::getString( map, "source" );
-    QString sourceTypeName = CalamaresUtils::getString( map, "sourcefs" );
+    QString source = Calamares::getString( map, "source" );
+    QString sourceTypeName = Calamares::getString( map, "sourcefs" );
     if ( source.isEmpty() || sourceTypeName.isEmpty() )
     {
         cWarning() << "Skipping item with bad source data:" << map;
@@ -115,7 +115,7 @@ UnpackFSCJob::setConfigurationMap( const QVariantMap& map )
         cWarning() << "Skipping item with source type None";
         return;
     }
-    QString destination = CalamaresUtils::getString( map, "destination" );
+    QString destination = Calamares::getString( map, "destination" );
     if ( destination.isEmpty() )
     {
         cWarning() << "Skipping item with empty destination";
