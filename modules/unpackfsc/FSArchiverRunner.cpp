@@ -62,7 +62,7 @@ FSArchiverRunner::checkPrerequisites( QString& fsarchiverExecutable ) const
 Calamares::JobResult
 FSArchiverRunner::checkDestination( QString& destinationPath ) const
 {
-    destinationPath = CalamaresUtils::System::instance()->targetPath( m_destination );
+    destinationPath = Calamares::System::instance()->targetPath( m_destination );
     if ( destinationPath.isEmpty() )
     {
         return Calamares::JobResult::internalError(

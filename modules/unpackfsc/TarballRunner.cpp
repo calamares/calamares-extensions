@@ -38,7 +38,7 @@ TarballRunner::run()
             Calamares::JobResult::MissingRequirements );
     }
 
-    const QString destinationPath = CalamaresUtils::System::instance()->targetPath( m_destination );
+    const QString destinationPath = Calamares::System::instance()->targetPath( m_destination );
     if ( destinationPath.isEmpty() )
     {
         return Calamares::JobResult::internalError(

@@ -18,7 +18,7 @@ Config::Config( QObject* parent )
 void
 Config::setConfigurationMap( const QVariantMap& cfgMap )
 {
-    using namespace CalamaresUtils;
+    using namespace Calamares;
 
     if ( getBool( cfgMap, "bogus", false ) )
     {
