@@ -32,6 +32,9 @@
 # In this repository, there is just one "group" to which USE_* applies:
 #   USE_os          : operating-system-specific modules.
 #
+# There is a knob WITH_QT6 which can be used to build against Qt6 rather
+# than Qt5. This must match what Calamares itself is built with.
+#
 ### NOTES
 #
 # Call this CMake file in script mode, e.g. `cmake -P CMakeLists.txt`
@@ -40,7 +43,7 @@
 #
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-set( CALAMARES_EXTENSIONS_VERSION 1.4.0 )
+set( CALAMARES_EXTENSIONS_VERSION 3.3.0 )
 
 include( ${CMAKE_CURRENT_LIST_DIR}/CMakeModules/ExtendedVersion.cmake )
 if ( CMAKE_SCRIPT_MODE_FILE )
@@ -56,6 +59,23 @@ project(calamares-extensions
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 
+# On developer's machine, the user package registry breaks
+# consumers by loading the developer's config from a build
+# directory (which doesn't have the rest of the config
+# installed inside it).
+set( CALAMARES_VERSION_REQUIRED 3.3.0 )
+find_package(Calamares ${CALAMARES_VERSION_REQUIRED} NO_CMAKE_PACKAGE_REGISTRY)
+if (NOT TARGET Calamares::calamares OR NOT TARGET Calamares::calamaresui)
+    find_package(Calamares ${CALAMARES_VERSION_REQUIRED} REQUIRED)
+endif()
+
+message(STATUS "Found Calamares version ${Calamares_VERSION}")
+message(STATUS "              libraries ${Calamares_LIB_DIRS}")
+message(STATUS "")
+
+### EXTRACTING DEPENDENCIES AND CONFIGURATION FROM CALAMARES
+#
+#
 if(WITH_QT6)
     set(kfname "KF6")
     set(KF_VERSION 5.240) # KDE Neon weirdness
@@ -78,19 +98,6 @@ set_package_properties(
     PURPOSE "Essential Framework for AboutData and Macros"
 )
 
-# On developer's machine, the user package registry breaks
-# consumers by loading the developer's config from a build
-# directory (which doesn't have the rest of the config
-# installed inside it).
-set( CALAMARES_VERSION_REQUIRED 3.3.0 )
-find_package(Calamares ${CALAMARES_VERSION_REQUIRED} NO_CMAKE_PACKAGE_REGISTRY)
-if (NOT TARGET Calamares::calamares OR NOT TARGET Calamares::calamaresui)
-    find_package(Calamares ${CALAMARES_VERSION_REQUIRED} REQUIRED)
-endif()
-
-message(STATUS "Found Calamares version ${Calamares_VERSION}")
-message(STATUS "              libraries ${Calamares_LIB_DIRS}")
-message(STATUS "")
 
 ### CMAKE SETUP
 #
