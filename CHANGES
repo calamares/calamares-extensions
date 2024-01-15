@@ -6,6 +6,19 @@ This is the changelog for Calamares-Extensions. For each release, the major
 changes and contributors are listed. Note that Calamares-Extensions does not
 have a historical changelog -- this log starts with version 1.0.0.
 
+# 3.3.1 (2024-01-15)
+
+This is the first *calamares-extensions* release to go with a Calamares 3.3
+release. The extensions now require Calamares 3.3. There is a branch for
+3.2 legacy support but no releases are planned for it. The main reason
+for this release is to have a 3.3-compatible release of *-extensions* at all.
+
+This release contains contributions from (alphabetically by first name):
+ - Adriaan de Groot
+ - Anke Boersma
+ - undef
+
+
 # 1.3.2 (2023-08-28)
 
 We skipped a couple of releases in the release-notes, then tagged
