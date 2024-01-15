@@ -64,8 +64,10 @@ set( CMAKE_CXX_STANDARD_REQUIRED ON )
 # directory (which doesn't have the rest of the config
 # installed inside it).
 set( CALAMARES_VERSION_REQUIRED 3.3.1 )
+message(STATUS "Looking for Calamares system-wide")
 find_package(Calamares ${CALAMARES_VERSION_REQUIRED} NO_CMAKE_PACKAGE_REGISTRY)
 if (NOT TARGET Calamares::calamares OR NOT TARGET Calamares::calamaresui)
+    message(STATUS "Looking for Calamares in the package registry")
     find_package(Calamares ${CALAMARES_VERSION_REQUIRED} REQUIRED)
 endif()
 
