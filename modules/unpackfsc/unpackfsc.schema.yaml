@@ -15,5 +15,8 @@ properties:
                 source: { type: string }
                 sourcefs: { type: string }
                 destination: { type: string }
-                weight: { type: integer, exclusiveMinimum: 0 }
+                condition:
+                    anyOf:
+                      - type: boolean
+                      - type: string
             required: [ source , sourcefs, destination ]

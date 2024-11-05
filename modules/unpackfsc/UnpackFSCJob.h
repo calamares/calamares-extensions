@@ -43,6 +43,7 @@ private:
     QString m_destination;
     Type m_type = Type::None;
     QString m_progressMessage;
+    QString m_conditionVariable;  ///< May be empty to express condition "true"
 };
 
 CALAMARES_PLUGIN_FACTORY_DECLARATION( UnpackFSCFactory )

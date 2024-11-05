@@ -13,6 +13,7 @@
 #include "TarballRunner.h"
 #include "UnsquashRunner.h"
 
+#include <GlobalStorage.h>
 #include <utils/Logger.h>
 #include <utils/NamedEnum.h>
 #include <utils/RAII.h>
@@ -50,7 +51,7 @@ UnpackFSCJob::UnpackFSCJob( QObject* parent )
 {
 }
 
-UnpackFSCJob::~UnpackFSCJob() { }
+UnpackFSCJob::~UnpackFSCJob() {}
 
 QString
 UnpackFSCJob::prettyName() const
@@ -63,9 +64,43 @@ UnpackFSCJob::prettyStatusMessage() const
 {
     return m_progressMessage;
 }
+
+static bool
+checkCondition( const QString& condition )
+{
+    if ( condition.isEmpty() )
+    {
+        return true;
+    }
+
+    GlobalStorage* gs = JobQueue::instance()->globalStorage();
+
+    bool ok = false;
+    const auto v = Calamares::lookup( gs, m_condition, ok );
+    if ( !ok )
+    {
+        cWarning() << "Item has condition '" << m_condition << "' which is not set at all (assuming 'true').";
+        return true;
+    }
+
+    if ( !v.canConvert< bool >() )
+    {
+        cWarning() << "Item has condition '" << m_condition << "' with value" << v << "(assuming 'true').";
+        return true;
+    }
+
+    return v.toBool();
+}
+
 Calamares::JobResult
 UnpackFSCJob::exec()
 {
+    if ( !checkCondition( m_condition ) )
+    {
+        cDebug() << "Skipping item with condition '" << m_condition << "' which is set to false.";
+        return Calamares::JobResult::ok();
+    }
+
     cScopedAssignment messageClearer( &m_progressMessage, QString() );
     std::unique_ptr< Runner > r;
     switch ( m_type )
@@ -101,8 +136,10 @@ UnpackFSCJob::exec()
 void
 UnpackFSCJob::setConfigurationMap( const QVariantMap& map )
 {
-    QString source = Calamares::getString( map, "source" );
-    QString sourceTypeName = Calamares::getString( map, "sourcefs" );
+    m_type = Type::None;
+
+    const QString source = Calamares::getString( map, "source" );
+    const QString sourceTypeName = Calamares::getString( map, "sourcefs" );
     if ( source.isEmpty() || sourceTypeName.isEmpty() )
     {
         cWarning() << "Skipping item with bad source data:" << map;
@@ -115,11 +152,36 @@ UnpackFSCJob::setConfigurationMap( const QVariantMap& map )
         cWarning() << "Skipping item with source type None";
         return;
     }
-    QString destination = Calamares::getString( map, "destination" );
+    const QString destination = Calamares::getString( map, "destination" );
     if ( destination.isEmpty() )
     {
         cWarning() << "Skipping item with empty destination";
         return;
+    }
+    const auto conditionKey = QStringLiteral( "condition" );
+    if ( map.contains( conditionKey ) )
+    {
+        const auto value = map[ conditionKey ];
+        if ( Calamares::typeOf( value ) == Calamares::BoolVariantType )
+        {
+            if ( !value.toBool() )
+            {
+                cDebug() << "Skipping item with condition set to false.";
+                // Leave type set to None, which will be skipped later
+                return;
+            }
+            // Else the condition is true, and we're fine leaving the string empty because that defaults to true
+        }
+        else
+        {
+            const auto variable = value.toString();
+            if ( variable.isEmpty() )
+            {
+                cDebug() << "Skipping item with condition '" << value << "' that is empty (use 'true' instead).";
+                return;
+            }
+            m_condition = variable;
+        }
     }
 
     m_source = source;
