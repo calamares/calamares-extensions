@@ -164,10 +164,6 @@ phase).
 
 ### Example Modules
 
-- [filekeeper](modules/filekeeper/CMakeLists.txt) is a C++ **job** module
-  to copy files from the host (live) system to the target system at
-  the end of installation, like logfiles. (This module is made obsolete
-  by the *preservefiles* module included with Calamares proper)
 - [freebsddisk](modules/freebsddisk/CMakeLists.txt) is a C++ **view**
   module with a QML-based UI. It has no actual functionality, and serves
   as a test that view modules can be built out-of-tree.
