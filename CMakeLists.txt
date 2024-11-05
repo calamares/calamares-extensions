@@ -43,7 +43,7 @@
 #
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-set( CALAMARES_EXTENSIONS_VERSION 3.3.1 )
+set( CALAMARES_EXTENSIONS_VERSION 3.3.11 )
 
 include( ${CMAKE_CURRENT_LIST_DIR}/CMakeModules/ExtendedVersion.cmake )
 if ( CMAKE_SCRIPT_MODE_FILE )
@@ -63,7 +63,7 @@ set( CMAKE_CXX_STANDARD_REQUIRED ON )
 # consumers by loading the developer's config from a build
 # directory (which doesn't have the rest of the config
 # installed inside it).
-set( CALAMARES_VERSION_REQUIRED 3.3.1 )
+set( CALAMARES_VERSION_REQUIRED 3.3.11 )
 message(STATUS "Looking for Calamares system-wide")
 find_package(Calamares ${CALAMARES_VERSION_REQUIRED} NO_CMAKE_PACKAGE_REGISTRY)
 if (NOT TARGET Calamares::calamares OR NOT TARGET Calamares::calamaresui)
@@ -152,7 +152,9 @@ calamares_add_module_subdirectory( modules/os-freebsd LIST_SKIPPED_MODULES )
 calamares_add_module_subdirectory( modules/os-nixos LIST_SKIPPED_MODULES )
 calamares_add_module_subdirectory( modules/refind LIST_SKIPPED_MODULES )
 calamares_add_module_subdirectory( modules/slowpython LIST_SKIPPED_MODULES )  # Python job
-calamares_add_module_subdirectory( modules/unpackfsc LIST_SKIPPED_MODULES )
+# The unpackfsc module moved into Calamares proper in 3.3.11
+#
+# calamares_add_module_subdirectory( modules/unpackfsc LIST_SKIPPED_MODULES )
 
 message(STATUS "Calamares extensions ${CALAMARES_EXTENSIONS_VERSION} for Calamares version ${Calamares_VERSION}")
 
