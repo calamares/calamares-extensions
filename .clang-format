@@ -22,14 +22,16 @@ Cpp11BracedListStyle: "false"
 FixNamespaceComments: "true"
 IncludeBlocks: Preserve
 IndentWidth: "4"
+InsertBraces: "true"
 MaxEmptyLinesToKeep: "2"
 NamespaceIndentation: None
 PointerAlignment: Left
 ReflowComments: "false"
 SortIncludes: "true"
 SpaceAfterCStyleCast: "false"
+SpaceInEmptyBlock: "false"
 SpacesBeforeTrailingComments: "2"
 SpacesInAngles: "true"
 SpacesInParentheses: "true"
 SpacesInSquareBrackets: "true"
-Standard: Cpp11
+Standard: c++17
