@@ -6,9 +6,9 @@ This is the changelog for Calamares-Extensions. For each release, the major
 changes and contributors are listed. Note that Calamares-Extensions does not
 have a historical changelog -- this log starts with version 1.0.0.
 
-# 3.3.11 (2024-11-05)
+# 3.3.12 (2024-11-21)
 
-This is a release to match Calamares 3.3.11. The *unpackfsc* module has
+This is a release to match Calamares 3.3.12. The *unpackfsc* module has
 moved to Calamares proper. There is a new module *flatpakinfo* that
 tries to populate a netinstall key with packages available as flatpak.
 

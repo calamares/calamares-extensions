@@ -43,7 +43,7 @@
 #
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-set( CALAMARES_EXTENSIONS_VERSION 3.3.11 )
+set( CALAMARES_EXTENSIONS_VERSION 3.3.12 )
 
 include( ${CMAKE_CURRENT_LIST_DIR}/CMakeModules/ExtendedVersion.cmake )
 if ( CMAKE_SCRIPT_MODE_FILE )
@@ -63,12 +63,12 @@ set( CMAKE_CXX_STANDARD_REQUIRED ON )
 # consumers by loading the developer's config from a build
 # directory (which doesn't have the rest of the config
 # installed inside it).
-set( CALAMARES_VERSION_REQUIRED 3.3.11 )
+set( CALAMARES_VERSION_REQUIRED 3.3.12 )
 message(STATUS "Looking for Calamares system-wide")
-find_package(Calamares ${CALAMARES_VERSION_REQUIRED} NO_CMAKE_PACKAGE_REGISTRY)
+find_package(Calamares ${CALAMARES_VERSION_REQUIRED} CONFIG NO_CMAKE_PACKAGE_REGISTRY)
 if (NOT TARGET Calamares::calamares OR NOT TARGET Calamares::calamaresui)
     message(STATUS "Looking for Calamares in the package registry")
-    find_package(Calamares ${CALAMARES_VERSION_REQUIRED} REQUIRED)
+    find_package(Calamares ${CALAMARES_VERSION_REQUIRED} CONFIG REQUIRED)
 endif()
 
 message(STATUS "Found Calamares version ${Calamares_VERSION}")
@@ -78,11 +78,11 @@ message(STATUS "")
 ### EXTRACTING DEPENDENCIES AND CONFIGURATION FROM CALAMARES
 #
 #
-if(WITH_QT6)
+if(Calamares_WITH_QT6)
     set(kfname "KF6")
     set(KF_VERSION 5.240) # KDE Neon weirdness
 else()
-    message(STATUS "Building Calamares with Qt5")
+    message(STATUS "Building Calamares-extensions with Qt5")
     set(kfname "KF5")
     set(KF_VERSION 5.78)
     # API that was deprecated before Qt 5.15 causes a compile error
