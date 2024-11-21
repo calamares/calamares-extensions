@@ -93,7 +93,7 @@ fi
 ### Setup
 #
 #
-BUILDDIR=$(mktemp -d -p . -t build.XXXXX)
+BUILDDIR=$(mktemp -d -p . -t cala-tmp-XXXXX)
 
 ### Build with default compiler
 #
